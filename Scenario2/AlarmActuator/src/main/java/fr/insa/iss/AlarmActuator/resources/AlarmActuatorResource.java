@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.insa.iss.AlarmActuator.model.AlarmActuator;
 
 @RestController
-@RequestMapping("/presence")
+@RequestMapping("/alarm")
 public class AlarmActuatorResource {
 	private AlarmActuator alarm = new AlarmActuator();
 	@GetMapping
