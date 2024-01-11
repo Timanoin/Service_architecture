@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.insa.iss.LightActuator.model.LightActuator;
 
 @RestController
-@RequestMapping("/presence")
+@RequestMapping("/light")
 public class LightActuatorResource {
 	private LightActuator light = new LightActuator();
 	@GetMapping
