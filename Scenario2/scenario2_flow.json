@@ -1,0 +1,1262 @@
+[
+    {
+        "id": "a49b169fd63a2db1",
+        "type": "tab",
+        "label": "Flux 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8a86727fe720a3f5",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET hour time",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8086/time",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 360,
+        "y": 80,
+        "wires": [
+            [
+                "2224f78eb2cbd148"
+            ]
+        ]
+    },
+    {
+        "id": "4b5a8cd9a4d77dd6",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "hours",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "8a86727fe720a3f5"
+            ]
+        ]
+    },
+    {
+        "id": "88c36ebc2a5daf76",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET to Presence Sensor",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8084/presence",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "217ab7f39f3c20f8"
+            ]
+        ]
+    },
+    {
+        "id": "e17c97a3eab05fd4",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "presence",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "88c36ebc2a5daf76"
+            ]
+        ]
+    },
+    {
+        "id": "af0a5bc758dc0544",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET to Door State",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8082/dooractuator",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 680,
+        "wires": [
+            [
+                "a92eacc45bbe43bf",
+                "d803f39d72fe902d"
+            ]
+        ]
+    },
+    {
+        "id": "bb61434b889cbba5",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "af0a5bc758dc0544"
+            ]
+        ]
+    },
+    {
+        "id": "51b04f391f3e5691",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET to Blinds State",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8081/blindsactuator",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 880,
+        "wires": [
+            [
+                "fd127be6ed187c7c",
+                "5cd95e8b09f992ce"
+            ]
+        ]
+    },
+    {
+        "id": "109ce6a1f335fdc9",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 880,
+        "wires": [
+            [
+                "51b04f391f3e5691"
+            ]
+        ]
+    },
+    {
+        "id": "2224f78eb2cbd148",
+        "type": "function",
+        "z": "a49b169fd63a2db1",
+        "name": "function 7",
+        "func": "var hour = msg.payload;\n\n\nif ((hour >= 6) && (hour < 22))\n{\n    msg.payload=\"true\";\n}\nelse{\n    msg.payload=\"false\";\n}\nmsg.topic=\"hours\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 80,
+        "wires": [
+            [
+                "217ab7f39f3c20f8"
+            ]
+        ]
+    },
+    {
+        "id": "217ab7f39f3c20f8",
+        "type": "function",
+        "z": "a49b169fd63a2db1",
+        "name": "function 8",
+        "func": "context.node = context.node || 0;\ncontext.node1 = context.node1 || 0;\n\nif(msg.topic==\"presence\"){\n    context.node = msg.payload;\n}\nif(msg.topic==\"hours\"){\n    context.node1 = msg.payload;\n}\n\nif ((context.node == \"true\") && (context.node1 == \"false\"))\n{\n    msg.payload=\"intrusion\";\n}\nelse if((context.node == \"false\") && (context.node1 == \"false\")){\n    msg.payload=\"fermeture\";\n}\nelse {\n    msg.payload=\"ouverture\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 180,
+        "wires": [
+            [
+                "1aafe4a2e752fd5a",
+                "0610df6389016c7e",
+                "b6688c403bfcc042"
+            ]
+        ]
+    },
+    {
+        "id": "bb5ee507a7926326",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT true to Alarm",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8080/alarm/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1210,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1aafe4a2e752fd5a",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_intrusion",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "intrusion",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 120,
+        "wires": [
+            [
+                "bb5ee507a7926326"
+            ]
+        ]
+    },
+    {
+        "id": "063426c4487e06bf",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT false to Alarm",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8080/alarm/newvalue?state=false",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0610df6389016c7e",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_fermeture",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "fermeture",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 240,
+        "wires": [
+            [
+                "063426c4487e06bf",
+                "1f35d789e116d0c6",
+                "aa554a56c5bbd225",
+                "4650fd4d0e309d87"
+            ]
+        ]
+    },
+    {
+        "id": "1f35d789e116d0c6",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT true to Door",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8082/dooractuator/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa554a56c5bbd225",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT true to Blinds",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8081/blindsactuator/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4650fd4d0e309d87",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT false to Light",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8083/light/newvalue?state=false",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44fd93c651832813",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT false to Alarm",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8080/alarm/newvalue?state=false",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6688c403bfcc042",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_ouverture",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ouverture",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 420,
+        "wires": [
+            [
+                "44fd93c651832813",
+                "f8a928512efa9050",
+                "a91b1364eaf15d77",
+                "342edf12e0d9926d"
+            ]
+        ]
+    },
+    {
+        "id": "f8a928512efa9050",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT false to Door",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8082/dooractuator/newvalue?state=false",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a91b1364eaf15d77",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT false to Blinds",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8081/blindsactuator/newvalue?state=false",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1240,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "342edf12e0d9926d",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT true to Light",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8083/light/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3cb36c7606171a6",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "verrouillee",
+        "filename": "C:\\Users\\stef-\\Downloads\\porte_verrouillee.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 790,
+        "y": 660,
+        "wires": [
+            [
+                "2bed7139ef739056"
+            ]
+        ]
+    },
+    {
+        "id": "2bed7139ef739056",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 980,
+        "y": 660,
+        "wires": [
+            [
+                "76ed4d35d5975c62"
+            ]
+        ]
+    },
+    {
+        "id": "76ed4d35d5975c62",
+        "type": "template",
+        "z": "a49b169fd63a2db1",
+        "name": "Image in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
+        "output": "str",
+        "x": 1160,
+        "y": 680,
+        "wires": [
+            [
+                "398a516ecba6a84d"
+            ]
+        ]
+    },
+    {
+        "id": "398a516ecba6a84d",
+        "type": "ui_template",
+        "z": "a49b169fd63a2db1",
+        "group": "60c7fa626cf1876b",
+        "name": "Door",
+        "order": 8,
+        "width": "7",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "ImageCan",
+        "x": 1310,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a92eacc45bbe43bf",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_true",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 660,
+        "wires": [
+            [
+                "c3cb36c7606171a6"
+            ]
+        ]
+    },
+    {
+        "id": "d803f39d72fe902d",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 700,
+        "wires": [
+            [
+                "d5320b850877d150"
+            ]
+        ]
+    },
+    {
+        "id": "d5320b850877d150",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "deverrouillee",
+        "filename": "C:\\Users\\stef-\\Downloads\\porte_deverrouillee.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 800,
+        "y": 700,
+        "wires": [
+            [
+                "4c5fe8fbedb355ae"
+            ]
+        ]
+    },
+    {
+        "id": "4c5fe8fbedb355ae",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 980,
+        "y": 700,
+        "wires": [
+            [
+                "76ed4d35d5975c62"
+            ]
+        ]
+    },
+    {
+        "id": "63d3590ae9060d08",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "Blinds_closed",
+        "filename": "C:\\Users\\stef-\\Downloads\\blinds_closed.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 860,
+        "y": 860,
+        "wires": [
+            [
+                "fe2e2e2fd3bdcc4c"
+            ]
+        ]
+    },
+    {
+        "id": "fe2e2e2fd3bdcc4c",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1050,
+        "y": 860,
+        "wires": [
+            [
+                "a9af366d0768828a"
+            ]
+        ]
+    },
+    {
+        "id": "a9af366d0768828a",
+        "type": "template",
+        "z": "a49b169fd63a2db1",
+        "name": "Image in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
+        "output": "str",
+        "x": 1220,
+        "y": 880,
+        "wires": [
+            [
+                "f63c0aa013222a24"
+            ]
+        ]
+    },
+    {
+        "id": "f63c0aa013222a24",
+        "type": "ui_template",
+        "z": "a49b169fd63a2db1",
+        "group": "60c7fa626cf1876b",
+        "name": "Blinds",
+        "order": 8,
+        "width": "8",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\" style=\"center-align=right\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "ImageCan",
+        "x": 1370,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd127be6ed187c7c",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_true",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 860,
+        "wires": [
+            [
+                "63d3590ae9060d08"
+            ]
+        ]
+    },
+    {
+        "id": "5cd95e8b09f992ce",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 900,
+        "wires": [
+            [
+                "4e08984356631a8d"
+            ]
+        ]
+    },
+    {
+        "id": "4e08984356631a8d",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "Blinds_open",
+        "filename": "C:\\Users\\stef-\\Downloads\\blinds_open.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 860,
+        "y": 900,
+        "wires": [
+            [
+                "e03bd6edae9b3398"
+            ]
+        ]
+    },
+    {
+        "id": "e03bd6edae9b3398",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1050,
+        "y": 900,
+        "wires": [
+            [
+                "a9af366d0768828a"
+            ]
+        ]
+    },
+    {
+        "id": "7381f97fe4e7fc00",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET to Light State",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8083/light",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 600,
+        "wires": [
+            [
+                "3bec9d1821505403",
+                "9f3e8c7c5c7a083e"
+            ]
+        ]
+    },
+    {
+        "id": "2b69825dc7f188e8",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "7381f97fe4e7fc00"
+            ]
+        ]
+    },
+    {
+        "id": "9aa79aa68e5d4a9e",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "allumee",
+        "filename": "C:\\Users\\stef-\\Downloads\\ampoule_allumee.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 780,
+        "y": 580,
+        "wires": [
+            [
+                "3cc86b65478532b5"
+            ]
+        ]
+    },
+    {
+        "id": "3cc86b65478532b5",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 980,
+        "y": 580,
+        "wires": [
+            [
+                "a83527b603ccf804"
+            ]
+        ]
+    },
+    {
+        "id": "a83527b603ccf804",
+        "type": "template",
+        "z": "a49b169fd63a2db1",
+        "name": "Image in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
+        "output": "str",
+        "x": 1160,
+        "y": 600,
+        "wires": [
+            [
+                "549ab81891350e34"
+            ]
+        ]
+    },
+    {
+        "id": "549ab81891350e34",
+        "type": "ui_template",
+        "z": "a49b169fd63a2db1",
+        "group": "60c7fa626cf1876b",
+        "name": "ampoule",
+        "order": 8,
+        "width": "6",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "ImageCan",
+        "x": 1320,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bec9d1821505403",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_true",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 580,
+        "wires": [
+            [
+                "9aa79aa68e5d4a9e"
+            ]
+        ]
+    },
+    {
+        "id": "9f3e8c7c5c7a083e",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 620,
+        "wires": [
+            [
+                "55019ffb80d826dd"
+            ]
+        ]
+    },
+    {
+        "id": "55019ffb80d826dd",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "eteinte",
+        "filename": "C:\\Users\\stef-\\Downloads\\ampoule_eteinte.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 780,
+        "y": 620,
+        "wires": [
+            [
+                "8462193684011e3d"
+            ]
+        ]
+    },
+    {
+        "id": "8462193684011e3d",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 980,
+        "y": 620,
+        "wires": [
+            [
+                "a83527b603ccf804"
+            ]
+        ]
+    },
+    {
+        "id": "fe00b96bbe260e97",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "GET to Alarm State",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8080/alarm",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 960,
+        "wires": [
+            [
+                "af1e6f34cb6e01de",
+                "0923b9433e1ed960"
+            ]
+        ]
+    },
+    {
+        "id": "93171b95c9088d99",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 960,
+        "wires": [
+            [
+                "fe00b96bbe260e97"
+            ]
+        ]
+    },
+    {
+        "id": "d8684184b6add9c1",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "Alarm_active",
+        "filename": "C:\\Users\\stef-\\Downloads\\alarmact.gif",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 860,
+        "y": 940,
+        "wires": [
+            [
+                "398b0fbbc02eeb7d"
+            ]
+        ]
+    },
+    {
+        "id": "398b0fbbc02eeb7d",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1050,
+        "y": 940,
+        "wires": [
+            [
+                "f95681fc23d0e7bf"
+            ]
+        ]
+    },
+    {
+        "id": "f95681fc23d0e7bf",
+        "type": "template",
+        "z": "a49b169fd63a2db1",
+        "name": "Image in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
+        "output": "str",
+        "x": 1220,
+        "y": 960,
+        "wires": [
+            [
+                "eafcca66d35c9229"
+            ]
+        ]
+    },
+    {
+        "id": "eafcca66d35c9229",
+        "type": "ui_template",
+        "z": "a49b169fd63a2db1",
+        "group": "60c7fa626cf1876b",
+        "name": "Alarm_logo",
+        "order": 8,
+        "width": "6",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\" style=\"center-align=right\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "ImageCan",
+        "x": 1390,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "af1e6f34cb6e01de",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_true",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 570,
+        "y": 940,
+        "wires": [
+            [
+                "d8684184b6add9c1"
+            ]
+        ]
+    },
+    {
+        "id": "0923b9433e1ed960",
+        "type": "switch",
+        "z": "a49b169fd63a2db1",
+        "name": "if_false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 980,
+        "wires": [
+            [
+                "638b3098f280f45b"
+            ]
+        ]
+    },
+    {
+        "id": "638b3098f280f45b",
+        "type": "file in",
+        "z": "a49b169fd63a2db1",
+        "name": "Alarm_desactive",
+        "filename": "C:\\Users\\stef-\\Downloads\\alarmdesact.gif",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 870,
+        "y": 980,
+        "wires": [
+            [
+                "253358a4b44138eb"
+            ]
+        ]
+    },
+    {
+        "id": "253358a4b44138eb",
+        "type": "base64",
+        "z": "a49b169fd63a2db1",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1050,
+        "y": 980,
+        "wires": [
+            [
+                "f95681fc23d0e7bf"
+            ]
+        ]
+    },
+    {
+        "id": "60c7fa626cf1876b",
+        "type": "ui_group",
+        "name": "Office",
+        "tab": "6b5985341d4dc51a",
+        "order": 1,
+        "disp": true,
+        "width": "27",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6b5985341d4dc51a",
+        "type": "ui_tab",
+        "name": "Home_scenario_2",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
