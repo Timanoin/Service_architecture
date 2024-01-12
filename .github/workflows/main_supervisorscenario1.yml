@@ -13,7 +13,7 @@ on:
     branches:
       - main
     paths:
-      - './Scenario1/SupervisorScenario1/**'
+      - 'Scenario1/SupervisorScenario1/**'
   workflow_dispatch:
 
 jobs:
