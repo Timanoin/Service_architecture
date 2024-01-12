@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/Scenario1/WindowActuator/target/*.jar'
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
