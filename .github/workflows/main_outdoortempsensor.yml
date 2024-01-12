@@ -12,6 +12,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - './Scenario1/OutdoorTempSensor/**'
   workflow_dispatch:
 
 jobs:
