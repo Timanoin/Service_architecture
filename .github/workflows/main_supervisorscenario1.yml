@@ -12,6 +12,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - './Scenario1/SupervisorScenario1/**'
   workflow_dispatch:
 
 jobs:
