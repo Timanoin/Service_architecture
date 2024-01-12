@@ -1,0 +1,798 @@
+[
+    {
+        "id": "4f717753502c4b52",
+        "type": "tab",
+        "label": "Projet service archi",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "136edfe80289fdfc",
+        "type": "mqtt in",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "Tout",
+        "topic": "Tout",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1b01beee92d833de",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 70,
+        "y": 180,
+        "wires": [
+            [
+                "ecc31c870c59939a",
+                "6b454bcc016e1d4a",
+                "5d050678aa68c975",
+                "37e521515286b36e"
+            ]
+        ]
+    },
+    {
+        "id": "ecc31c870c59939a",
+        "type": "debug",
+        "z": "4f717753502c4b52",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6b454bcc016e1d4a",
+        "type": "ui_text",
+        "z": "4f717753502c4b52",
+        "group": "60c7fa626cf1876b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "STATE_DISPLAY",
+        "label": "",
+        "format": "T outdoor: {{msg.payload}}°C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "159c97d01aa53c31",
+        "type": "ui_audio",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "group": "60c7fa626cf1876b",
+        "voice": "urn:moz-tts:sapi:Microsoft Julie - French (France)?fr-FR",
+        "always": true,
+        "x": 480,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "5d050678aa68c975",
+        "type": "ui_toast",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "position": "top right",
+        "displayTime": "1",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Tout",
+        "name": "",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b234f489f5549725",
+        "type": "mqtt in",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "Tin",
+        "topic": "Tin",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1b01beee92d833de",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "542d0d08c28540be",
+                "f979ec155487083f",
+                "7f04be888b2107b1",
+                "73eabf08a178da5c"
+            ]
+        ]
+    },
+    {
+        "id": "542d0d08c28540be",
+        "type": "debug",
+        "z": "4f717753502c4b52",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f979ec155487083f",
+        "type": "ui_text",
+        "z": "4f717753502c4b52",
+        "group": "60c7fa626cf1876b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "STATE_DISPLAY",
+        "label": "",
+        "format": "T indoor: {{msg.payload}}°C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b944bfae75091610",
+        "type": "ui_audio",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "group": "60c7fa626cf1876b",
+        "voice": "urn:moz-tts:sapi:Microsoft Julie - French (France)?fr-FR",
+        "always": true,
+        "x": 780,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "7f04be888b2107b1",
+        "type": "ui_toast",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "position": "bottom right",
+        "displayTime": "1",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Tin",
+        "name": "",
+        "x": 660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a7317e8fe992c01c",
+        "type": "mqtt out",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "Tout",
+        "topic": "Tout",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1b01beee92d833de",
+        "x": 1190,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "9d5aa3b6db7b5b1c",
+        "type": "inject",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Tout",
+        "payload": "9",
+        "payloadType": "str",
+        "x": 970,
+        "y": 400,
+        "wires": [
+            [
+                "a7317e8fe992c01c"
+            ]
+        ]
+    },
+    {
+        "id": "0ccc98427a2842a5",
+        "type": "mqtt out",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "Tin",
+        "topic": "Tin",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1b01beee92d833de",
+        "x": 1190,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f00bfcb0c9d126e3",
+        "type": "inject",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Tin",
+        "payload": "25",
+        "payloadType": "str",
+        "x": 970,
+        "y": 440,
+        "wires": [
+            [
+                "0ccc98427a2842a5"
+            ]
+        ]
+    },
+    {
+        "id": "37e521515286b36e",
+        "type": "convert",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "convertTo": "string",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "a185e9ec6a0b4e1a"
+            ]
+        ]
+    },
+    {
+        "id": "73eabf08a178da5c",
+        "type": "convert",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "",
+        "convertTo": "string",
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "fa93cebfbfd551ca"
+            ]
+        ]
+    },
+    {
+        "id": "a185e9ec6a0b4e1a",
+        "type": "function",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "function 1",
+        "func": "var original = msg.payload;\nmsg.payload= 'Il fait '+original+' ° Celsius dehors';\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "159c97d01aa53c31"
+            ]
+        ]
+    },
+    {
+        "id": "fa93cebfbfd551ca",
+        "type": "function",
+        "z": "4f717753502c4b52",
+        "d": true,
+        "name": "function 2",
+        "func": "var original = msg.payload;\nmsg.payload= 'Il fait '+original+\" ° Celsius à l'intérieur\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 540,
+        "wires": [
+            [
+                "b944bfae75091610"
+            ]
+        ]
+    },
+    {
+        "id": "1b0224b3680b3cfe",
+        "type": "http request",
+        "z": "4f717753502c4b52",
+        "name": "GET to Outdoor Sensor Value",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8084/scenario1/sensorout",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "ecc31c870c59939a",
+                "6b454bcc016e1d4a",
+                "5d050678aa68c975",
+                "afd6a191496cb77d"
+            ]
+        ]
+    },
+    {
+        "id": "5e69786d364b91e0",
+        "type": "inject",
+        "z": "4f717753502c4b52",
+        "name": "Appel période Service",
+        "props": [
+            {
+                "p": "action",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "out",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "1b0224b3680b3cfe"
+            ]
+        ]
+    },
+    {
+        "id": "8ebea4909dcbb61c",
+        "type": "inject",
+        "z": "4f717753502c4b52",
+        "name": "Appel période Service",
+        "props": [
+            {
+                "p": "action",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "in",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "bb38694e776e582c"
+            ]
+        ]
+    },
+    {
+        "id": "bb38694e776e582c",
+        "type": "http request",
+        "z": "4f717753502c4b52",
+        "name": "GET to Indoor Sensor Value",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8084/scenario1/sensorin",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "542d0d08c28540be",
+                "f979ec155487083f",
+                "7f04be888b2107b1",
+                "afd6a191496cb77d"
+            ]
+        ]
+    },
+    {
+        "id": "afd6a191496cb77d",
+        "type": "function",
+        "z": "4f717753502c4b52",
+        "name": "function 6",
+        "func": "context.node = context.node || 0;\ncontext.node1 = context.node1 || 0;\n\nif(msg.topic==\"in\"){\n    context.node = msg.payload;\n}\nif(msg.topic==\"out\"){\n    context.node1 = msg.payload;\n}\n\nif ((context.node > context.node1) && (context.node1 <= 27) && (context.node1 >= 18))\n{\n    msg.payload=\"true\";\n}\nelse{\n    msg.payload=\"false\";\n}\nmsg.topic=\"ToActuator\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [
+                "056e9a1c6c7b7d36",
+                "299cb1562988c5ea",
+                "20f3e9e832f9fd38",
+                "59c2d187db3ea1d8",
+                "b4dc6e787a0af575"
+            ]
+        ]
+    },
+    {
+        "id": "056e9a1c6c7b7d36",
+        "type": "debug",
+        "z": "4f717753502c4b52",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "299cb1562988c5ea",
+        "type": "ui_text",
+        "z": "4f717753502c4b52",
+        "group": "60c7fa626cf1876b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "STATE_DISPLAY",
+        "label": "",
+        "format": "Actuator state : {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 930,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "57b8a171f08a88f2",
+        "type": "file in",
+        "z": "4f717753502c4b52",
+        "name": "open_window",
+        "filename": "C:\\Users\\stef-\\Downloads\\fenetre_ouverte.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1340,
+        "y": 200,
+        "wires": [
+            [
+                "ac5c5fd1dc20834c"
+            ]
+        ]
+    },
+    {
+        "id": "ac5c5fd1dc20834c",
+        "type": "base64",
+        "z": "4f717753502c4b52",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1520,
+        "y": 200,
+        "wires": [
+            [
+                "6cdbb59947ae4784"
+            ]
+        ]
+    },
+    {
+        "id": "20f3e9e832f9fd38",
+        "type": "switch",
+        "z": "4f717753502c4b52",
+        "name": "if_true",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1170,
+        "y": 200,
+        "wires": [
+            [
+                "57b8a171f08a88f2"
+            ]
+        ]
+    },
+    {
+        "id": "dd97d1f6dbc28087",
+        "type": "file in",
+        "z": "4f717753502c4b52",
+        "name": "closed_window",
+        "filename": "C:\\Users\\stef-\\Downloads\\fenetre_fermee.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1340,
+        "y": 160,
+        "wires": [
+            [
+                "bb43bdea8aac6060"
+            ]
+        ]
+    },
+    {
+        "id": "bb43bdea8aac6060",
+        "type": "base64",
+        "z": "4f717753502c4b52",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 1520,
+        "y": 160,
+        "wires": [
+            [
+                "6cdbb59947ae4784"
+            ]
+        ]
+    },
+    {
+        "id": "6cdbb59947ae4784",
+        "type": "template",
+        "z": "4f717753502c4b52",
+        "name": "Image in",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
+        "output": "str",
+        "x": 1680,
+        "y": 160,
+        "wires": [
+            [
+                "f9c47088c8f4f7af"
+            ]
+        ]
+    },
+    {
+        "id": "f9c47088c8f4f7af",
+        "type": "ui_template",
+        "z": "4f717753502c4b52",
+        "group": "60c7fa626cf1876b",
+        "name": "RIO Logo",
+        "order": 8,
+        "width": "6",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "ImageCan",
+        "x": 1840,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4dc6e787a0af575",
+        "type": "switch",
+        "z": "4f717753502c4b52",
+        "name": "if_false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1180,
+        "y": 160,
+        "wires": [
+            [
+                "dd97d1f6dbc28087"
+            ]
+        ]
+    },
+    {
+        "id": "a8466375a22079a9",
+        "type": "comment",
+        "z": "4f717753502c4b52",
+        "name": "# # Please donwload pictures of opened and closed window and put the right path for each picture in each image bloc",
+        "info": "# # Please donwload pictures of opened and closed window and put the right path for each picture in each image bloc",
+        "x": 1280,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "55d1f18e25b34096",
+        "type": "comment",
+        "z": "4f717753502c4b52",
+        "name": "This mechanism needs to be upgraded, sometimes a picture is not loaded on time and waits another message to be displayed",
+        "info": "",
+        "x": 1300,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "59c2d187db3ea1d8",
+        "type": "http request",
+        "z": "4f717753502c4b52",
+        "name": "PUT to Actuator",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8084/scenario1/windowcompute",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1200,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b01beee92d833de",
+        "type": "mqtt-broker",
+        "name": "House_monitoring",
+        "broker": "10.32.44.184",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "60c7fa626cf1876b",
+        "type": "ui_group",
+        "name": "Office",
+        "tab": "6b5985341d4dc51a",
+        "order": 1,
+        "disp": true,
+        "width": "27",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6b5985341d4dc51a",
+        "type": "ui_tab",
+        "name": "Home_scenario_2",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
