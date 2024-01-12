@@ -11,6 +11,7 @@
         "id": "8a86727fe720a3f5",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "GET hour time",
         "method": "GET",
         "ret": "txt",
@@ -35,6 +36,7 @@
         "id": "4b5a8cd9a4d77dd6",
         "type": "inject",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "Appel période Service",
         "props": [
             {
@@ -59,6 +61,7 @@
         "id": "88c36ebc2a5daf76",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "GET to Presence Sensor",
         "method": "GET",
         "ret": "txt",
@@ -83,6 +86,7 @@
         "id": "e17c97a3eab05fd4",
         "type": "inject",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "Appel période Service",
         "props": [
             {
@@ -111,7 +115,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "localhost:8082/dooractuator",
+        "url": "localhost:8085/scenario2/doorstate",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -134,7 +138,7 @@
         "z": "a49b169fd63a2db1",
         "name": "Appel période Service",
         "props": [],
-        "repeat": "10",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": "1",
@@ -155,7 +159,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "localhost:8081/blindsactuator",
+        "url": "localhost:8085/scenario2/blindsstate",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -164,7 +168,7 @@
         "senderr": false,
         "headers": [],
         "x": 370,
-        "y": 880,
+        "y": 760,
         "wires": [
             [
                 "fd127be6ed187c7c",
@@ -178,13 +182,13 @@
         "z": "a49b169fd63a2db1",
         "name": "Appel période Service",
         "props": [],
-        "repeat": "10",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": "1",
         "topic": "",
         "x": 110,
-        "y": 880,
+        "y": 760,
         "wires": [
             [
                 "51b04f391f3e5691"
@@ -195,6 +199,7 @@
         "id": "2224f78eb2cbd148",
         "type": "function",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "function 7",
         "func": "var hour = msg.payload;\n\n\nif ((hour >= 6) && (hour < 22))\n{\n    msg.payload=\"true\";\n}\nelse{\n    msg.payload=\"false\";\n}\nmsg.topic=\"hours\";\nreturn msg;",
         "outputs": 1,
@@ -215,6 +220,7 @@
         "id": "217ab7f39f3c20f8",
         "type": "function",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "function 8",
         "func": "context.node = context.node || 0;\ncontext.node1 = context.node1 || 0;\n\nif(msg.topic==\"presence\"){\n    context.node = msg.payload;\n}\nif(msg.topic==\"hours\"){\n    context.node1 = msg.payload;\n}\n\nif ((context.node == \"true\") && (context.node1 == \"false\"))\n{\n    msg.payload=\"intrusion\";\n}\nelse if((context.node == \"false\") && (context.node1 == \"false\")){\n    msg.payload=\"fermeture\";\n}\nelse {\n    msg.payload=\"ouverture\";\n}\nreturn msg;",
         "outputs": 1,
@@ -237,6 +243,7 @@
         "id": "bb5ee507a7926326",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT true to Alarm",
         "method": "PUT",
         "ret": "txt",
@@ -250,7 +257,7 @@
         "senderr": false,
         "headers": [],
         "x": 1210,
-        "y": 120,
+        "y": 40,
         "wires": [
             []
         ]
@@ -259,6 +266,7 @@
         "id": "1aafe4a2e752fd5a",
         "type": "switch",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "if_intrusion",
         "property": "payload",
         "propertyType": "msg",
@@ -273,7 +281,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1010,
-        "y": 120,
+        "y": 40,
         "wires": [
             [
                 "bb5ee507a7926326"
@@ -284,6 +292,7 @@
         "id": "063426c4487e06bf",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT false to Alarm",
         "method": "PUT",
         "ret": "txt",
@@ -297,7 +306,7 @@
         "senderr": false,
         "headers": [],
         "x": 1230,
-        "y": 180,
+        "y": 100,
         "wires": [
             []
         ]
@@ -306,6 +315,7 @@
         "id": "0610df6389016c7e",
         "type": "switch",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "if_fermeture",
         "property": "payload",
         "propertyType": "msg",
@@ -320,7 +330,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1010,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "063426c4487e06bf",
@@ -334,11 +344,58 @@
         "id": "1f35d789e116d0c6",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT true to Door",
         "method": "PUT",
         "ret": "txt",
         "paytoqs": "ignore",
         "url": "localhost:8082/dooractuator/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa554a56c5bbd225",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "d": true,
+        "name": "PUT true to Blinds",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8081/blindsactuator/newvalue?state=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1230,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4650fd4d0e309d87",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "d": true,
+        "name": "PUT false to Light",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8083/light/newvalue?state=false",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -353,53 +410,10 @@
         ]
     },
     {
-        "id": "aa554a56c5bbd225",
-        "type": "http request",
-        "z": "a49b169fd63a2db1",
-        "name": "PUT true to Blinds",
-        "method": "PUT",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "localhost:8081/blindsactuator/newvalue?state=true",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1230,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "4650fd4d0e309d87",
-        "type": "http request",
-        "z": "a49b169fd63a2db1",
-        "name": "PUT false to Light",
-        "method": "PUT",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "localhost:8083/light/newvalue?state=false",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1230,
-        "y": 300,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "44fd93c651832813",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT false to Alarm",
         "method": "PUT",
         "ret": "txt",
@@ -413,7 +427,7 @@
         "senderr": false,
         "headers": [],
         "x": 1230,
-        "y": 360,
+        "y": 280,
         "wires": [
             []
         ]
@@ -422,6 +436,7 @@
         "id": "b6688c403bfcc042",
         "type": "switch",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "if_ouverture",
         "property": "payload",
         "propertyType": "msg",
@@ -436,7 +451,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1010,
-        "y": 420,
+        "y": 340,
         "wires": [
             [
                 "44fd93c651832813",
@@ -450,6 +465,7 @@
         "id": "f8a928512efa9050",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT false to Door",
         "method": "PUT",
         "ret": "txt",
@@ -463,7 +479,7 @@
         "senderr": false,
         "headers": [],
         "x": 1230,
-        "y": 400,
+        "y": 320,
         "wires": [
             []
         ]
@@ -472,6 +488,7 @@
         "id": "a91b1364eaf15d77",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT false to Blinds",
         "method": "PUT",
         "ret": "txt",
@@ -485,7 +502,7 @@
         "senderr": false,
         "headers": [],
         "x": 1240,
-        "y": 440,
+        "y": 360,
         "wires": [
             []
         ]
@@ -494,6 +511,7 @@
         "id": "342edf12e0d9926d",
         "type": "http request",
         "z": "a49b169fd63a2db1",
+        "d": true,
         "name": "PUT true to Light",
         "method": "PUT",
         "ret": "txt",
@@ -507,7 +525,7 @@
         "senderr": false,
         "headers": [],
         "x": 1230,
-        "y": 480,
+        "y": 400,
         "wires": [
             []
         ]
@@ -525,10 +543,10 @@
         "encoding": "none",
         "allProps": false,
         "x": 790,
-        "y": 660,
+        "y": 700,
         "wires": [
             [
-                "2bed7139ef739056"
+                "4c5fe8fbedb355ae"
             ]
         ]
     },
@@ -608,7 +626,7 @@
         "y": 660,
         "wires": [
             [
-                "c3cb36c7606171a6"
+                "d5320b850877d150"
             ]
         ]
     },
@@ -633,7 +651,7 @@
         "y": 700,
         "wires": [
             [
-                "d5320b850877d150"
+                "c3cb36c7606171a6"
             ]
         ]
     },
@@ -650,10 +668,10 @@
         "encoding": "none",
         "allProps": false,
         "x": 800,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
-                "4c5fe8fbedb355ae"
+                "2bed7139ef739056"
             ]
         ]
     },
@@ -685,10 +703,10 @@
         "encoding": "none",
         "allProps": false,
         "x": 860,
-        "y": 860,
+        "y": 780,
         "wires": [
             [
-                "fe2e2e2fd3bdcc4c"
+                "e03bd6edae9b3398"
             ]
         ]
     },
@@ -700,7 +718,7 @@
         "action": "",
         "property": "payload",
         "x": 1050,
-        "y": 860,
+        "y": 740,
         "wires": [
             [
                 "a9af366d0768828a"
@@ -719,7 +737,7 @@
         "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
         "output": "str",
         "x": 1220,
-        "y": 880,
+        "y": 760,
         "wires": [
             [
                 "f63c0aa013222a24"
@@ -742,7 +760,7 @@
         "templateScope": "local",
         "className": "ImageCan",
         "x": 1370,
-        "y": 880,
+        "y": 760,
         "wires": [
             []
         ]
@@ -765,10 +783,10 @@
         "repair": false,
         "outputs": 1,
         "x": 570,
-        "y": 860,
+        "y": 740,
         "wires": [
             [
-                "63d3590ae9060d08"
+                "4e08984356631a8d"
             ]
         ]
     },
@@ -790,10 +808,10 @@
         "repair": false,
         "outputs": 1,
         "x": 580,
-        "y": 900,
+        "y": 780,
         "wires": [
             [
-                "4e08984356631a8d"
+                "63d3590ae9060d08"
             ]
         ]
     },
@@ -810,10 +828,10 @@
         "encoding": "none",
         "allProps": false,
         "x": 860,
-        "y": 900,
+        "y": 740,
         "wires": [
             [
-                "e03bd6edae9b3398"
+                "fe2e2e2fd3bdcc4c"
             ]
         ]
     },
@@ -825,7 +843,7 @@
         "action": "",
         "property": "payload",
         "x": 1050,
-        "y": 900,
+        "y": 780,
         "wires": [
             [
                 "a9af366d0768828a"
@@ -840,7 +858,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "localhost:8083/light",
+        "url": "localhost:8085/scenario2/lightstate",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -863,7 +881,7 @@
         "z": "a49b169fd63a2db1",
         "name": "Appel période Service",
         "props": [],
-        "repeat": "10",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": "1",
@@ -1044,7 +1062,7 @@
         "method": "GET",
         "ret": "txt",
         "paytoqs": "ignore",
-        "url": "localhost:8080/alarm",
+        "url": "localhost:8085/scenario2/alarmstate",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -1053,7 +1071,7 @@
         "senderr": false,
         "headers": [],
         "x": 370,
-        "y": 960,
+        "y": 840,
         "wires": [
             [
                 "af1e6f34cb6e01de",
@@ -1067,13 +1085,13 @@
         "z": "a49b169fd63a2db1",
         "name": "Appel période Service",
         "props": [],
-        "repeat": "10",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": "1",
         "topic": "",
         "x": 110,
-        "y": 960,
+        "y": 840,
         "wires": [
             [
                 "fe00b96bbe260e97"
@@ -1093,7 +1111,7 @@
         "encoding": "none",
         "allProps": false,
         "x": 860,
-        "y": 940,
+        "y": 820,
         "wires": [
             [
                 "398b0fbbc02eeb7d"
@@ -1108,7 +1126,7 @@
         "action": "",
         "property": "payload",
         "x": 1050,
-        "y": 940,
+        "y": 820,
         "wires": [
             [
                 "f95681fc23d0e7bf"
@@ -1127,7 +1145,7 @@
         "template": "<img src=\"data:image/png;base64,{{payload}}\"style=\"width=\"569\" height=\"197\"\"/>",
         "output": "str",
         "x": 1220,
-        "y": 960,
+        "y": 840,
         "wires": [
             [
                 "eafcca66d35c9229"
@@ -1150,7 +1168,7 @@
         "templateScope": "local",
         "className": "ImageCan",
         "x": 1390,
-        "y": 960,
+        "y": 840,
         "wires": [
             []
         ]
@@ -1173,7 +1191,7 @@
         "repair": false,
         "outputs": 1,
         "x": 570,
-        "y": 940,
+        "y": 820,
         "wires": [
             [
                 "d8684184b6add9c1"
@@ -1198,7 +1216,7 @@
         "repair": false,
         "outputs": 1,
         "x": 580,
-        "y": 980,
+        "y": 860,
         "wires": [
             [
                 "638b3098f280f45b"
@@ -1218,7 +1236,7 @@
         "encoding": "none",
         "allProps": false,
         "x": 870,
-        "y": 980,
+        "y": 860,
         "wires": [
             [
                 "253358a4b44138eb"
@@ -1233,10 +1251,92 @@
         "action": "",
         "property": "payload",
         "x": 1050,
-        "y": 980,
+        "y": 860,
         "wires": [
             [
                 "f95681fc23d0e7bf"
+            ]
+        ]
+    },
+    {
+        "id": "6b86fd0fda488d4e",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT to Alarm",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8085/scenario2/alarmcompute",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 360,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6879bfce6310383a",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "6b86fd0fda488d4e"
+            ]
+        ]
+    },
+    {
+        "id": "43b78f9fcd2c4085",
+        "type": "http request",
+        "z": "a49b169fd63a2db1",
+        "name": "PUT to Appliances",
+        "method": "PUT",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "localhost:8085/scenario2/lightcompute",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ef1636fa7721ccb4",
+        "type": "inject",
+        "z": "a49b169fd63a2db1",
+        "name": "Appel période Service",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "43b78f9fcd2c4085"
             ]
         ]
     },
