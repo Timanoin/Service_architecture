@@ -3,6 +3,11 @@
 
 name: Build and deploy JAR app to Azure Web App - TempSensor-app
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./Scenario1/TempSensor
+    
 on:
   push:
     branches:
