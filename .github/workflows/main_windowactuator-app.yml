@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: './target/*.jar'
+          path: '${{ github.workspace }}/Scenario1/WindowActuator/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
