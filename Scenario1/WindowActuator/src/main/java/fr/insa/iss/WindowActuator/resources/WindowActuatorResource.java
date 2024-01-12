@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/windowactuator")
+@RequestMapping("/window")
 public class WindowActuatorResource {
 	private WindowActuator Window = new WindowActuator();
 	
