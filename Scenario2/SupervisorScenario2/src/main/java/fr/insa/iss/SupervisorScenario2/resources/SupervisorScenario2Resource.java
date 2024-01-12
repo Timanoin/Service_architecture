@@ -22,17 +22,17 @@ public class SupervisorScenario2Resource {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         
 		// get all students information
-		int currHourTime = restTemplate.getForObject("http://localhost:8085/time/", int.class);
+		int currHourTime = restTemplate.getForObject("http://localhost:8086/time/", int.class);
 		// get all students evaluation
-		boolean presence = restTemplate.getForObject("http://localhost:8086/presence/", boolean.class);
+		boolean presence = restTemplate.getForObject("http://localhost:8084/presence/", boolean.class);
 		
 		if (presence && (currHourTime>=22 || currHourTime<6)) {
 	        // Activate alarm
-	        restTemplate.put("http://localhost:8090/alarm/newvalue?state=true", requestEntity);
+	        restTemplate.put("http://localhost:8080/alarm/newvalue?state=true", requestEntity);
 		}
 		else {
 			// Stop alarm
-	        restTemplate.put("http://localhost:8090/alarm/newvalue?state=false", requestEntity);
+	        restTemplate.put("http://localhost:8080/alarm/newvalue?state=false", requestEntity);
 		}
 		
 		return 0;	
@@ -49,21 +49,21 @@ public class SupervisorScenario2Resource {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         
 		// get all students information
-		int currHourTime = restTemplate.getForObject("http://localhost:8085/time/", int.class);
+		int currHourTime = restTemplate.getForObject("http://localhost:8086/time/", int.class);
 		// get all students evaluation
-		boolean presence = restTemplate.getForObject("http://localhost:8086/presence/", boolean.class);
+		boolean presence = restTemplate.getForObject("http://localhost:8084/presence/", boolean.class);
 		
 		if ((currHourTime>22 || currHourTime<6) || !presence) {
 	        // Turn off the lights, close the blinds and the doors
-	        restTemplate.put("http://localhost:8087/door/newvalue?state=false", requestEntity);
-	        restTemplate.put("http://localhost:8088/blinds/newvalue?state=false", requestEntity);
-	        restTemplate.put("http://localhost:8089/light/newvalue?state=false", requestEntity);
+	        restTemplate.put("http://localhost:8082/door/newvalue?state=false", requestEntity);
+	        restTemplate.put("http://localhost:8081/blinds/newvalue?state=false", requestEntity);
+	        restTemplate.put("http://localhost:8083/light/newvalue?state=false", requestEntity);
 		}
 		else {
 			// Turn on the lights, open the blinds and the doors
-	        restTemplate.put("http://localhost:8087/door/newvalue?state=true", requestEntity);
-	        restTemplate.put("http://localhost:8088/blinds/newvalue?state=true", requestEntity);
-	        restTemplate.put("http://localhost:8089/light/newvalue?state=true", requestEntity);
+	        restTemplate.put("http://localhost:8082/door/newvalue?state=true", requestEntity);
+	        restTemplate.put("http://localhost:8081/blinds/newvalue?state=true", requestEntity);
+	        restTemplate.put("http://localhost:8083/light/newvalue?state=true", requestEntity);
 		}
 		
 		return 0;	
