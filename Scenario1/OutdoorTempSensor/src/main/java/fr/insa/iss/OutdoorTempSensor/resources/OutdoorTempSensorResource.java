@@ -10,7 +10,7 @@ import fr.insa.iss.OutdoorTempSensor.model.TempSensor;
 
 
 @RestController
-@RequestMapping("/outtempsensor")
+@RequestMapping("/outtemp")
 public class OutdoorTempSensorResource {
 	private TempSensor Sensor = new TempSensor();
 	
