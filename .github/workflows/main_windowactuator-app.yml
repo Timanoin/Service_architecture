@@ -3,6 +3,11 @@
 
 name: Build and deploy JAR app to Azure Web App - WindowActuator-app
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./Scenario1/WindowActuator
+    
 on:
   push:
     branches:
