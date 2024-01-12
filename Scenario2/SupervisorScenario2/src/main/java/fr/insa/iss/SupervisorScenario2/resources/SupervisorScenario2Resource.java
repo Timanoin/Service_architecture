@@ -2,6 +2,7 @@ package fr.insa.iss.SupervisorScenario2.resources;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,9 @@ public class SupervisorScenario2Resource {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         
 		// get all students information
-		int currHourTime = restTemplate.getForObject("http://localhost:8086/time/", int.class);
+		int currHourTime = restTemplate.getForObject("http://localhost:8086/time", int.class);
 		// get all students evaluation
-		boolean presence = restTemplate.getForObject("http://localhost:8084/presence/", boolean.class);
+		boolean presence = restTemplate.getForObject("http://localhost:8084/presence", boolean.class);
 		
 		if (presence && (currHourTime>=22 || currHourTime<6)) {
 	        // Activate alarm
@@ -49,9 +50,9 @@ public class SupervisorScenario2Resource {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         
 		// get all students information
-		int currHourTime = restTemplate.getForObject("http://localhost:8086/time/", int.class);
+		int currHourTime = restTemplate.getForObject("http://localhost:8086/time", int.class);
 		// get all students evaluation
-		boolean presence = restTemplate.getForObject("http://localhost:8084/presence/", boolean.class);
+		boolean presence = restTemplate.getForObject("http://localhost:8084/presence", boolean.class);
 		
 		if ((currHourTime>22 || currHourTime<6) || !presence) {
 	        // Turn off the lights, close the blinds and the doors
@@ -67,5 +68,56 @@ public class SupervisorScenario2Resource {
 		}
 		
 		return 0;	
+	}
+	
+	@GetMapping("/lightstate")
+	public boolean light() {
+		// RestTemplate for sending requests
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// get all students information
+		boolean light = restTemplate.getForObject("http://localhost:8083/light", boolean.class);
+		
+		return light;	
+	}
+	@GetMapping("/doorstate")
+	public boolean door() {
+		// RestTemplate for sending requests
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// get all students information
+		boolean door = restTemplate.getForObject("http://localhost:8082/door", boolean.class);
+		
+		return door;	
+	}
+	@GetMapping("/blindsstate")
+	public boolean blinds() {
+		// RestTemplate for sending requests
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// get all students information
+		boolean blinds = restTemplate.getForObject("http://localhost:8081/blinds", boolean.class);
+		
+		return blinds;	
+	}
+	@GetMapping("/alarmstate")
+	public boolean alarm() {
+		// RestTemplate for sending requests
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// get all students information
+		boolean alarm = restTemplate.getForObject("http://localhost:8080/alarm", boolean.class);
+		
+		return alarm;	
+	}
+	@GetMapping("/presencestate")
+	public boolean presence() {
+		// RestTemplate for sending requests
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// get all students information
+		boolean presence = restTemplate.getForObject("http://localhost:8084/presence", boolean.class);
+		
+		return presence;	
 	}
 }
