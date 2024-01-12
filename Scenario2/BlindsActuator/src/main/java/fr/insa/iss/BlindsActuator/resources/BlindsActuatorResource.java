@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.insa.iss.BlindsActuator.model.BlindsActuator;
 
 @RestController
-@RequestMapping("/blindsactuator")
+@RequestMapping("/blinds")
 public class BlindsActuatorResource {
 	private BlindsActuator blinds = new BlindsActuator();
 	
