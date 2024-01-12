@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/dooractuator")
+@RequestMapping("/door")
 public class DoorActuatorResource {
 	private DoorActuator door = new DoorActuator();
 	
