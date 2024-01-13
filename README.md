@@ -1,2 +1,3 @@
-# ServiceArchitecture
-Projet Service architecture - IoT for House monitoring
+# Service Architecture Project
+
+For more information about this project, please check out xxx.pdf.
