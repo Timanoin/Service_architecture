@@ -12,8 +12,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - './Scenario1/TempSensor/**'
+    # paths:
+    #   - './Scenario1/TempSensor/**'
   workflow_dispatch:
 
 jobs:

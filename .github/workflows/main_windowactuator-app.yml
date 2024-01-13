@@ -12,8 +12,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - './Scenario1/WindowActuator/**'
+    # paths:
+    #   - './Scenario1/WindowActuator/**'
   workflow_dispatch:
 
 jobs:
