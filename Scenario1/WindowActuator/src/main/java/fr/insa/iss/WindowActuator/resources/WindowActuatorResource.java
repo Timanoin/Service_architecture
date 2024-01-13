@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/window")
 public class WindowActuatorResource {
-	private WindowActuator Window = new WindowActuator();
+	private WindowActuator window = new WindowActuator();
 	
 	@PutMapping("/newvalue")
-	public int NewValue(@RequestParam("state") boolean State) {
-		Window.setState(State);
+	public int newValue(@RequestParam("state") boolean State) {
+		window.setState(State);
 		return 0;
 	}
 	
 	@GetMapping
-	public boolean GetValue() {
-		return Window.getState();
+	public boolean getValue() {
+		return window.getState();
 	}
 }
 

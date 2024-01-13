@@ -10,18 +10,18 @@ import fr.insa.iss.TempSensor.model.TempSensor;
 
 
 @RestController
-@RequestMapping("/tempsensor")
+@RequestMapping("/temp")
 public class TempSensorResource {
-	private TempSensor Sensor = new TempSensor();
+	private TempSensor sensor = new TempSensor();
 	
 	@PutMapping("/newvalue")
-	public int NewValue(@RequestParam("temp") int Temp) {
-		Sensor.setTemp(Temp);
+	public int newValue(@RequestParam("temperature") int temp) {
+		sensor.setTemp(temp);
 		return 0;
 	}
 	
 	@GetMapping
-	public int GetValue() {
-		return Sensor.getTemp();
+	public int getValue() {
+		return sensor.getTemp();
 	}
 }

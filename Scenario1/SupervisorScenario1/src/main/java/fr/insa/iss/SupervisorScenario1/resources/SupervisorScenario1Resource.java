@@ -20,7 +20,7 @@ public class SupervisorScenario1Resource {
 	public int sensorInMonitor() {
 				
 		// get temperature inside
-		int tempIn = restTemplate.getForObject("http://localhost:8081/tempsensor", int.class);
+		int tempIn = restTemplate.getForObject("https://tempsensor-app.azurewebsites.net/temp", int.class);
 		
 		return tempIn;
 	}
@@ -28,12 +28,12 @@ public class SupervisorScenario1Resource {
 	@GetMapping("/sensorout")
 	public int sensorOutMonitor() {
 		// get temperature outside
-		int tempOut = restTemplate.getForObject("http://localhost:8082/outtempsensor", int.class);
+		int tempOut = restTemplate.getForObject("https://outdoortempsensor.azurewebsites.net/outtemp", int.class);
 		
 		return tempOut;
 	}
 	
-	@PutMapping("/windowcompute")
+	@PutMapping("/compute")
 	public int windowMonitor() {
 		
 		// Create headers if necessary
@@ -47,11 +47,11 @@ public class SupervisorScenario1Resource {
 		
 		if ((tempOut<tempIn)&&(tempOut<=27)&&(tempOut>=18)) {
 	        // Open the window if temperature outside between [18;27] and if inside temperature is higher than outside one
-	        restTemplate.put("http://localhost:8080/windowactuator/newvalue?state=true", requestEntity);
+	        restTemplate.put("https://windowactuator-app.azurewebsites.net/window/newvalue?state=true", requestEntity);
 		}
 		else {
 			// Else close the window
-	        restTemplate.put("http://localhost:8080/windowactuator/newvalue?state=false", requestEntity);
+	        restTemplate.put("https://windowactuator-app.azurewebsites.net/window/newvalue?state=false", requestEntity);
 		}
 		
 		return 0;	

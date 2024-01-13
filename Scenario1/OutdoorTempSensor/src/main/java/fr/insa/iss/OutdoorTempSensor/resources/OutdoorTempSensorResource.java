@@ -12,18 +12,18 @@ import fr.insa.iss.OutdoorTempSensor.model.TempSensor;
 @RestController
 @RequestMapping("/outtemp")
 public class OutdoorTempSensorResource {
-	private TempSensor Sensor = new TempSensor();
+	private TempSensor sensor = new TempSensor();
 
 	// PUT request that updates the current saved value.
 	@PutMapping("/newvalue")
-	public int NewValue(@RequestParam("temp") int Temp) {
-		Sensor.setTemp(Temp);
+	public int newValue(@RequestParam("temperature") int temp) {
+		sensor.setTemp(temp);
 		return 0;
 	}
 
 	// GET request that returns the saved value.
 	@GetMapping
-	public int GetValue() {
-		return Sensor.getTemp();
+	public int getValue() {
+		return sensor.getTemp();
 	}
 }
